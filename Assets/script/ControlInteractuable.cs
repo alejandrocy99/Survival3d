@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ControlInteractuable : MonoBehaviour
@@ -62,12 +63,20 @@ public class ControlInteractuable : MonoBehaviour
         Debug.Log("Interaccion con: " + objetoInteractuable.name);
         textoInteraccion.text = string.Format("<b>[E]</b> {0}", interactuable.ObtenerMensajeInteraccion());
     }
+    public void Oninteractuar(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            interactuable.OnInteractuar();
+            interactuable = null;
+            objetoInteractuable = null;
+            textoInteraccion.gameObject.SetActive(false);
+        }    
+    }
 }
-
-
 
 public interface IInteractuable
 {
     string ObtenerMensajeInteraccion();// mensaje que se muestra al interactuar
-    void Interactuar();// que se hace al recoger
+    void OnInteractuar();// que se hace al recoger
 }
