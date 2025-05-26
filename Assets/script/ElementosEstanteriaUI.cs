@@ -35,7 +35,7 @@ public class ElementoInventarioUI : MonoBehaviour
     
     public void OnButtonClick()
     {
-
+        ControlInventario.instancia.ElementoSeleccionado(indice);
     }
     
 }

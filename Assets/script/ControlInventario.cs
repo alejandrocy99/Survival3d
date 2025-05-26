@@ -16,7 +16,7 @@ public class ControlInventario : MonoBehaviour
     public Transform posicionSoltar;
 
     [Header("Elemento seleccionado")]
-    private ElementoInventario elementoSeleccionado;
+    public ElementoInventario elementoSeleccionado;
     private int indiceElementoSeleccionado;
     public TextMeshProUGUI nombreElementoSeleccionado;
     public TextMeshProUGUI descripcionElementoSeleccionado;
@@ -175,19 +175,53 @@ public class ControlInventario : MonoBehaviour
         return null;
     }
 
-    void ElementoSeleccionado(int indice)
+    public void ElementoSeleccionado(int indice)
     {
+        if (elementoInventario[indice] == null)
+        {
+            //si no hay elemento seleccionado, selecciono el elemento
+            elementoSeleccionado = elementoInventario[indice];
+            indiceElementoSeleccionado = indice;
 
+            nombreElementoSeleccionado.text = elementoSeleccionado.elemento.nombre;
+            descripcionElementoSeleccionado.text = elementoSeleccionado.elemento.descripcion;
+
+            botonSoltar.gameObject.SetActive(true);
+            botonUsar.gameObject.SetActive(true);
+        }
+        else
+        {
+            //si ya hay un elemento seleccionado, lo deselecciono
+            elementoSeleccionado = null;
+            indiceElementoSeleccionado = -1;
+        }
     }
 
     void EliminarElementoSeleccionado(int indice)
     {
+        elementoSeleccionado.cantidad--;
+        if (elementoSeleccionado.cantidad <= 0)
+        {
+            elementoSeleccionado.elemento = null; // Elimino el elemento
+            LimpiarElementoSeleccionado();
+        }
+        
+    }
 
+    private void LimpiarElementoSeleccionado()
+    {
+        elementoSeleccionado = null;
+        nombreElementoSeleccionado.text = string.Empty;
+        descripcionElementoSeleccionado.text = string.Empty;
+        botonSoltar.gameObject.SetActive(false);
+        botonUsar.gameObject.SetActive(false);
+        // Actualizar la UI
+        ActualizarUI();
     }
 
     public void OnBotonUsar()
     {
-
+        EliminarElementoSeleccionado(indiceElementoSeleccionado);
     }
 
     public void OnBotonSoltar()
