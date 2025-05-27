@@ -283,6 +283,7 @@ public class ControlInventario : MonoBehaviour
                 break;
         }
         EliminarElementoSeleccionado(indiceElementoSeleccionado);
+        ActualizarUI();
     }
 
     // Acción al pulsar el botón de soltar
