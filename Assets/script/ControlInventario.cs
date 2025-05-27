@@ -130,7 +130,7 @@ public class ControlInventario : MonoBehaviour
 
     private void SoltarElemento(DatosElemento elemento)
     {
-
+        Instantiate(elemento.prefab, posicionSoltar.position, Quaternion.identity);
     }
 
     private void ActualizarUI()
@@ -226,7 +226,8 @@ public class ControlInventario : MonoBehaviour
 
     public void OnBotonSoltar()
     {
-
+        SoltarElemento(elementoSeleccionado.elemento);
+        EliminarElementoSeleccionado(indiceElementoSeleccionado);
     }
 
 
