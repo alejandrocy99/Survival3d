@@ -5418,6 +5418,7 @@ GameObject:
   - component: {fileID: 557273777}
   - component: {fileID: 557273778}
   - component: {fileID: 557273779}
+  - component: {fileID: 557273780}
   m_Layer: 0
   m_Name: Jugador
   m_TagString: Player
@@ -5744,6 +5745,22 @@ MonoBehaviour:
   onCerrarInventario:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &557273780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557273771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64a0d1d2e54e8f4db9c277ddc09cc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabElemento1: {fileID: 0}
+  prefabElemento2: {fileID: 0}
+  prefabElemento3: {fileID: 0}
+  puntoDeGeneracion: {fileID: 0}
 --- !u!1001 &558752018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12960,6 +12977,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1463247783}
     m_Modifications:
+    - target: {fileID: 40954828622661462, guid: 2b36d77a9e3d3ae4f84c29cc29749678, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40954828622661462, guid: 2b36d77a9e3d3ae4f84c29cc29749678, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 40954828622661462, guid: 2b36d77a9e3d3ae4f84c29cc29749678, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.30111146
+      objectReference: {fileID: 0}
     - target: {fileID: 3009225349892679695, guid: 2b36d77a9e3d3ae4f84c29cc29749678, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

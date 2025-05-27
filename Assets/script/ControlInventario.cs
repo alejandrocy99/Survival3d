@@ -250,16 +250,33 @@ public class ControlInventario : MonoBehaviour
     // Acción al pulsar el botón de usar
     public void OnBotonUsar()
     {
+        if (elementoSeleccionado == null || elementoSeleccionado.elemento == null)
+        {
+            Debug.LogWarning("No hay elemento seleccionado para usar.");
+            return;
+        }
+        if (controlIndicador == null)
+        {
+            controlIndicador = FindObjectOfType<ControlIndicador>();
+            if (controlIndicador == null)
+            {
+                Debug.LogWarning("No se encontró el ControlIndicador.");
+                return;
+            }
+        }
         switch (elementoSeleccionado.elemento.tipoElemento)
         {
             case TipoElemento.Comida:
-                controlIndicador.indicadorHambre.SumarValor(cantidadSumar);
+                if (controlIndicador.indicadorHambre != null)
+                    controlIndicador.indicadorHambre.SumarValor(cantidadSumar);
                 break;
             case TipoElemento.Bebida:
-                controlIndicador.indicadorSed.SumarValor(cantidadSumar);
+                if (controlIndicador.indicadorSed != null)
+                    controlIndicador.indicadorSed.SumarValor(cantidadSumar);
                 break;
             case TipoElemento.Descanso:
-                controlIndicador.indicadorEnergia.SumarValor(cantidadSumar);                    
+                if (controlIndicador.indicadorEnergia != null)
+                    controlIndicador.indicadorEnergia.SumarValor(cantidadSumar);
                 break;
             default:
                 Debug.LogWarning("Tipo de elemento no reconocido: " + elementoSeleccionado.elemento.tipoElemento);
@@ -275,6 +292,7 @@ public class ControlInventario : MonoBehaviour
         Debug.Log("Soltando elemento seleccionado: " + elementoSeleccionado);
         SoltarElemento(elementoSeleccionado.elemento);
         EliminarElementoSeleccionado(indiceElementoSeleccionado);
+        ActualizarUI();
     }
 }
 
