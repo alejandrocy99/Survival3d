@@ -6,26 +6,28 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-
-
-
-
-
+// Clase principal que controla los indicadores de salud, energía, hambre y sed del jugador.
 public class ControlIndicador : MonoBehaviour, IDeterioro
 {
+    // Referencias a los indicadores de la UI.
     public Indicador indicadorSalud;
     public Indicador indicadorEnergia;
     public Indicador indicadorHambre;
     public Indicador indicadorSed;
+
+    // Cantidad de salud que se reduce cuando el hambre o la sed llegan a cero.
     public float reduccionSaludConHambre;
     public float reduccionSaludConSed;
-    public TextMeshProUGUI textoGameOver;
-    public UnityEvent OnSufrirDeterioro;
 
+    // Texto que se muestra cuando el jugador muere.
+    public TextMeshProUGUI textoGameOver;
+
+    // Evento que se dispara cuando el jugador sufre deterioro.
+    public UnityEvent OnSufrirDeterioro;
 
     void Start()
     {
-        //inicializamos los valores de las barras
+        // Inicializamos los valores actuales de las barras con sus valores iniciales.
         indicadorSalud.valorActual = indicadorSalud.valorInicial;
         indicadorEnergia.valorActual = indicadorEnergia.valorInicial;
         indicadorHambre.valorActual = indicadorHambre.valorInicial;
@@ -34,35 +36,49 @@ public class ControlIndicador : MonoBehaviour, IDeterioro
 
     void Update()
     {
+        // Actualizamos el llenado visual de las barras según su porcentaje actual.
         indicadorHambre.image.fillAmount = indicadorHambre.ObtenerPorcentaje();
         indicadorSed.image.fillAmount = indicadorSed.ObtenerPorcentaje();
         indicadorEnergia.image.fillAmount = indicadorEnergia.ObtenerPorcentaje();
         indicadorSalud.image.fillAmount = indicadorSalud.ObtenerPorcentaje();
+
+        // Restamos valores a las barras de hambre, sed y energía según su índice de deterioro.
         indicadorHambre.RestarValor(indicadorHambre.indiceDeterioro * Time.deltaTime);
         indicadorSed.RestarValor(indicadorSed.indiceDeterioro * Time.deltaTime);
         indicadorEnergia.RestarValor(indicadorEnergia.indiceDeterioro * Time.deltaTime);
+
+        // Si el hambre llega a cero, se reduce la salud.
         if (indicadorHambre.valorActual <= 0.0f)
         {
             indicadorSalud.RestarValor(reduccionSaludConHambre * Time.deltaTime);
         }
+        // Si la sed llega a cero, se reduce la salud.
         if (indicadorSed.valorActual <= 0.0f)
         {
             indicadorSalud.RestarValor(reduccionSaludConSed * Time.deltaTime);
-        }if (indicadorSalud.valorActual <= 0.0f)
+        }
+        // Si la salud llega a cero, el jugador muere.
+        if (indicadorSalud.valorActual <= 0.0f)
         {
             Morir();
-        }if(Input.GetKeyDown(KeyCode.H)){
+        }
+        // Recarga de hambre al presionar la tecla H (para pruebas).
+        if(Input.GetKeyDown(KeyCode.H)){
             indicadorHambre.SumarValor(100);
-        }if(Input.GetKeyDown(KeyCode.B)){
+        }
+        // Recarga de sed al presionar la tecla B (para pruebas).
+        if(Input.GetKeyDown(KeyCode.B)){
             indicadorSed.SumarValor(100);
-        }}
-
-    public void Morir(){
-        
-            textoGameOver.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        
+        }
     }
+
+    // Método que se ejecuta cuando el jugador muere.
+    public void Morir(){
+        textoGameOver.gameObject.SetActive(true); // Muestra el texto de Game Over.
+        Time.timeScale = 0; // Detiene el tiempo del juego.
+    }
+
+    // Método para restaurar un valor específico de un indicador según el código recibido.
     public void Restaurar(float valorRecuperacion,string codigo){
         switch (codigo.ToLower())
         {
@@ -82,32 +98,27 @@ public class ControlIndicador : MonoBehaviour, IDeterioro
                 Debug.LogError("Codigo de restauracion " + codigo + " no valido");
                 break;
         }
-
-        
     }
 
-    
-
+    // Método que aplica deterioro a la salud y dispara el evento correspondiente.
     public void ProduccirDeterioro(float cantidad){
         indicadorSalud.RestarValor(cantidad);
         OnSufrirDeterioro?.Invoke();
     }
-
-    
-
 }
+
+// Clase que representa un indicador (barra) de la UI.
 [System.Serializable]
 public class Indicador
 {
-    public Image image;
-    [HideInInspector] public float valorActual;
-    public float valorInicial;
+    public Image image; // Imagen de la barra en la UI.
+    [HideInInspector] public float valorActual; // Valor actual de la barra.
+    public float valorInicial; // Valor inicial de la barra.
 
-    public float indiceRecuperacion;
-    public float indiceDeterioro;
+    public float indiceRecuperacion; // Velocidad de recuperación.
+    public float indiceDeterioro;    // Velocidad de deterioro.
 
-
-    //metodo para sumar el valor de la barra
+    // Suma valor a la barra, sin exceder el valor inicial.
     public void SumarValor(float valor)
     {
         valorActual += valor;
@@ -116,7 +127,7 @@ public class Indicador
             valorActual = valorInicial;
         }
     }
-    //metodo para restar el valor de la barra
+    // Resta valor a la barra, sin bajar de cero.
     public void RestarValor(float valor)
     {
         valorActual -= valor;
@@ -126,16 +137,14 @@ public class Indicador
         }
     }
 
-    //metodo obtener porcentaje de la barra
+    // Devuelve el porcentaje actual de la barra (entre 0 y 1).
     public float ObtenerPorcentaje()
     {
         return valorActual / valorInicial;
     }
-
-
-
 }
 
+// Interfaz para objetos que pueden sufrir deterioro y restauración.
 public interface IDeterioro
 {
     void ProduccirDeterioro(float cantidad);

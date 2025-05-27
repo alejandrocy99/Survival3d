@@ -10,8 +10,8 @@ public class ObjectoElemento : MonoBehaviour, IInteractuable
         // Aquí puedes implementar la lógica de interacción, como recoger el objeto o mostrar información.
         // Por ejemplo, podrías destruir el objeto al recogerlo:
         Debug.Log("Interacción con el objeto: " + datosElemento.nombre);
-        ControlInventario.instancia.AnadirElemento(datosElemento);
-        Destroy(gameObject);
+        ControlInventario.instancia.AnadirElemento(datosElemento); // Añade el elemento al inventario
+        Destroy(gameObject); // Destruye el objeto del juego
         
         
         
@@ -19,7 +19,7 @@ public class ObjectoElemento : MonoBehaviour, IInteractuable
 
     public string ObtenerMensajeInteraccion()
     {
-    return "Dale a la E para conquistar el mundo  " +  datosElemento.nombre;
+    return "Dale a la E para conquistar el mundo  " +  datosElemento.nombre; // Retorna el mensaje de interacción con el nombre del elemento
     }
 }
 
