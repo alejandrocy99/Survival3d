@@ -16,3 +16,4 @@ MonoBehaviour:
   descripcion: "quita sue\xF1o"
   icono: {fileID: 21300000, guid: 040adbed1229f9548a0ba1e5ba0464c0, type: 3}
   prefab: {fileID: 1566480151899768, guid: cc75fe4428c283744b896a8a9ce76127, type: 3}
+  tipoElemento: 2

@@ -24,6 +24,7 @@ public class ControlJugador : MonoBehaviour
     [Header("Salto")]
     public int fuerzaSalto = 100;
     public LayerMask capaSuelo;
+    private bool puedeMirar = true;
 
 
     private void Awake()
@@ -39,12 +40,21 @@ public class ControlJugador : MonoBehaviour
 
     private void LateUpdate()
     {
-        VistaCamara();
+
+        if (puedeMirar)
+        {
+            VistaCamara();
+        }
     }
 
     private void FixedUpdate()
     {
         MovimientoJugador();
+    }
+
+    void Start()
+    {
+        ModoInventario(false);
     }
 
     private void VistaCamara()
@@ -92,7 +102,7 @@ public class ControlJugador : MonoBehaviour
     private bool EstaSuelo()
     {
         //verifico si el jugador esta en el suelo
-        if(rb == null) return false;
+        if (rb == null) return false;
         //RaycastHit hit;
         Ray[] rays = new Ray[4]{
                 new Ray(transform.position + transform.forward * 0.25f, Vector3.down),
@@ -103,10 +113,16 @@ public class ControlJugador : MonoBehaviour
 
         foreach (Ray ray in rays)
             return Physics.Raycast(ray, 1f, capaSuelo);
-            
-        return false;}
 
-        
+        return false;
+    }
+
+    public void ModoInventario(bool value)
+    {
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+        puedeMirar = !value;
+    }
+
 
 
 
@@ -119,9 +135,10 @@ public class ControlJugador : MonoBehaviour
             Gizmos.DrawRay(transform.position - transform.forward * 0.25f, Vector3.down);
             Gizmos.DrawRay(transform.position + transform.right * 0.25f, Vector3.down);
             Gizmos.DrawRay(transform.position - transform.right * 0.25f, Vector3.down);
-            Gizmos.DrawRay(transform.position, Vector3.down);       
+            Gizmos.DrawRay(transform.position, Vector3.down);
+        }
     }
-}}
+}
 
 
 

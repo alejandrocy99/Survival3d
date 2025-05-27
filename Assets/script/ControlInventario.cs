@@ -25,8 +25,11 @@ public class ControlInventario : MonoBehaviour
     public Button botonUsar;
     public Button botonSoltar;
 
+    public int cantidadSumar;
+
     //necesitamos el control del jugador
     private ControlJugador controladorJugador;
+    private ControlIndicador controlIndicador;
 
     //el inventario no esta permanente en la pantalla
     [Header("Eventos")]
@@ -73,12 +76,14 @@ public class ControlInventario : MonoBehaviour
         {
             //cerrar
             ventanaInventario.SetActive(false);
+            controladorJugador.ModoInventario(false);// Cambiar el modo del jugador a no inventario
             Time.timeScale = 1f; // Reanudar el tiempo del juego
         }
         else
         {
             //abrir
             ventanaInventario.SetActive(true);
+            controladorJugador.ModoInventario(true); // Cambiar el modo del jugador a inventario
             Time.timeScale = 0f; // Pausar el tiempo del juego
         }
 
@@ -130,6 +135,7 @@ public class ControlInventario : MonoBehaviour
 
     private void SoltarElemento(DatosElemento elemento)
     {
+        Debug.Log("Soltando elemento: " );
         Instantiate(elemento.prefab, posicionSoltar.position, Quaternion.identity);
     }
 
@@ -177,7 +183,9 @@ public class ControlInventario : MonoBehaviour
 
     public void ElementoSeleccionado(int indice)
     {
-        if (elementoInventario[indice] == null)
+        Debug.Log("Elemento seleccionado en el inventario: " + indice);
+        Debug.Log("Elemento seleccionado: " + elementoInventario[indice].elemento?.nombre);
+        if (elementoInventario[indice] != null)
         {
             //si no hay elemento seleccionado, selecciono el elemento
             elementoSeleccionado = elementoInventario[indice];
@@ -221,11 +229,29 @@ public class ControlInventario : MonoBehaviour
 
     public void OnBotonUsar()
     {
+        switch (elementoSeleccionado.elemento.tipoElemento)
+        {
+            case TipoElemento.Comida:
+                controlIndicador.indicadorHambre.SumarValor(cantidadSumar);
+                break;
+            case TipoElemento.Bebida:
+                controlIndicador.indicadorSed.SumarValor(cantidadSumar);
+                break;
+            case TipoElemento.Descanso:
+                controlIndicador.indicadorEnergia.SumarValor(cantidadSumar);                    
+                break;
+            default:
+                Debug.LogWarning("Tipo de elemento no reconocido: " + elementoSeleccionado.elemento.tipoElemento);
+                break;
+        }
+        
         EliminarElementoSeleccionado(indiceElementoSeleccionado);
     }
 
     public void OnBotonSoltar()
     {
+        Debug.Log("estoy en on boton soltar");
+        Debug.Log("Soltando elemento seleccionado: " + elementoSeleccionado);
         SoltarElemento(elementoSeleccionado.elemento);
         EliminarElementoSeleccionado(indiceElementoSeleccionado);
     }

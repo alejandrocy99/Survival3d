@@ -4002,7 +4002,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 416517120}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 557273779}
+        m_TargetAssemblyTypeName: ControlInventario, Assembly-CSharp
+        m_MethodName: OnBotonUsar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &416517120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5725,6 +5737,7 @@ MonoBehaviour:
   valoresNecesidadElementoSeleccionado: {fileID: 0}
   botonUsar: {fileID: 416517119}
   botonSoltar: {fileID: 1816765212}
+  cantidadSumar: 10
   onAbrirInventario:
     m_PersistentCalls:
       m_Calls: []
@@ -8962,6 +8975,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee8500205890c243873020ff07b9899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1037689888
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1092447111}
+    m_Modifications:
+    - target: {fileID: 1434572903805961097, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925058523007542340, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_Name
+      value: ObjetoAgua (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.774
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.978
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
 --- !u!1001 &1056159471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9222,6 +9296,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1819305852}
+  - {fileID: 2128079300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1099978674 stripped
@@ -13938,7 +14013,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1816765213}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 557273779}
+        m_TargetAssemblyTypeName: ControlInventario, Assembly-CSharp
+        m_MethodName: OnBotonSoltar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1816765213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15603,6 +15690,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee8500205890c243873020ff07b9899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2128079300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7288881784991857651, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+  m_PrefabInstance: {fileID: 1037689888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2130829083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15757,6 +15849,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1092447111}
     m_Modifications:
+    - target: {fileID: 1434572903805961097, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 2925058523007542340, guid: 71996e76ad59e644e847f6cb06351e7a, type: 3}
       propertyPath: m_Name
       value: ObjetoAgua

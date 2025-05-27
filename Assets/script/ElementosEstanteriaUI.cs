@@ -31,10 +31,16 @@ public class ElementoInventarioUI : MonoBehaviour
         icono.gameObject.SetActive(false);
         textoCantidad.text = string.Empty;
     }
-
+    
     
     public void OnButtonClick()
     {
+        ColorBlock colorBlock = boton.colors;
+        colorBlock.normalColor = Color.white;
+        colorBlock.pressedColor = Color.green;
+        Debug.Log("estoy en ElementoInventarioUI OnButtonClick");
+        Debug.Log("indice: " + indice);
+        
         ControlInventario.instancia.ElementoSeleccionado(indice);
     }
     

@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public enum TipoElemento
+{
+    Comida,
+    Bebida,
+    Descanso,
+}
+
 [CreateAssetMenu(fileName = "NuevoElemento", menuName = "Inventario/Elemento")]
 public class DatosElemento : ScriptableObject
 {
@@ -11,5 +20,6 @@ public class DatosElemento : ScriptableObject
     public string descripcion;
     public Sprite icono;
     public GameObject prefab;
+    public TipoElemento tipoElemento;
 
 }
